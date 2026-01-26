@@ -43,6 +43,19 @@ a {
   transition: all 0.3s ease;
 }
 
+/* Mockup Banner */
+.mockup-banner {
+  background-color: #ffcc00;
+  color: #000;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 2000;
+  position: relative;
+  letter-spacing: 1px;
+}
+
 /* Header & Nav */
 /* Header & Nav */
 header {
