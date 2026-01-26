@@ -1,0 +1,351 @@
+/* Global Styles */
+:root {
+  --primary-color: #2E5945;
+  /* Deep Green */
+  --secondary-color: #8C6A4B;
+  /* Earthy Brown */
+  --accent-color: #D98E32;
+  /* Harvest Orange */
+  --bg-color: #F8F5F2;
+  /* Cream/Off-white */
+  --text-color: #333333;
+  --light-text: #F8F5F2;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Header & Nav */
+/* Header & Nav */
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: transparent;
+  /* Removed gradient for simpler look */
+  display: none;
+  /* Hidden as requested */
+}
+
+/* Hero Section */
+.hero {
+  height: 35vh;
+  /* Reduced to a banner strip */
+  min-height: 300px;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('hero.png') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content {
+  color: var(--light-text);
+  max-width: 800px;
+  padding: 0 20px;
+  margin-top: 60px;
+  /* Offset for header if needed, or just centering */
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  /* Slightly smaller for balance */
+  margin-bottom: 10px;
+  /* Tighter spacing */
+  color: var(--light-text);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 0;
+  /* Ensuring tight spacing */
+}
+
+/* Sections */
+section {
+  padding: 80px 10%;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--accent-color);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* About Section */
+.about-content {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+  font-size: 1.1rem;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+  height: 350px;
+  background: url('hero.png') no-repeat center right/cover;
+  /* Reusing hero detail */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+/* Projects Section */
+.projects {
+  background-color: #fff;
+  text-align: center;
+}
+
+.project-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.lead {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Gallery Section */
+.gallery {
+  padding-bottom: 80px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 4/3;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background: rgba(46, 89, 69, 0.85);
+  /* Primary color with opacity */
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .caption {
+  transform: translateY(0);
+}
+
+/* Contact Footer */
+footer {
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  text-align: center;
+  padding: 80px 5%;
+}
+
+footer h2 {
+  color: var(--light-text);
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--light-text);
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.social-link:hover {
+  opacity: 1;
+  transform: translateY(-5px);
+  color: var(--accent-color);
+}
+
+.social-link svg {
+  width: 40px;
+  height: 40px;
+}
+
+.social-link span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+
+  .swish-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Swish Membership Section */
+.swish-section {
+  background-color: #fff;
+}
+
+.swish-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.swish-info {
+  flex: 1;
+  text-align: left;
+}
+
+.swish-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.swish-details {
+  margin-top: 30px;
+  background-color: var(--bg-color);
+  padding: 20px;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--accent-color);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.swish-qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.qr-placeholder {
+  width: 200px;
+  height: 200px;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius);
+  color: #888;
+  font-weight: 600;
+  border: 2px dashed #ccc;
+}
+
+.scan-text {
+  font-weight: 500;
+  color: var(--primary-color);
+}
