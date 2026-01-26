@@ -1,22 +1,24 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-.env
+# Website Essentials ONLY
+# Ignore everything not related to the live site
 
-# Node.js
-node_modules/
-dist/
-.npmrc
-package-lock.json
+# Agent & Project Management
+.agent/
+.gemini/
+_project_specs/
+PROJECT_HUB.md
+knowledgebase.md
+task.md
+init_project.ps1
 
-# IDE / OS
-.idea/
+# System & IDE
 .vscode/
+.idea/
 .DS_Store
 Thumbs.db
+ehthumbs.db
 
-# Project Specific
-logs/
-temp/
+# Dependencies (if any added later)
+node_modules/
+venv/
+__pycache__/
+*.log
