@@ -16,8 +16,10 @@ Vi verkar för en grönare framtid och en starkare lokal matkultur.
 
 **Hållbar mat Helsingborg** är en ideell förening som samlar engagerade invånare, producenter och matälskare. Vårt syfte är att främja hållbar livsmedelsproduktion och konsumtion i Helsingborg.
 
+
 Vi arbetar praktiskt med allt från stadsodling och workshops till att stötta initiativ som Potatisuppropet. Tillsammans skapar vi en mer resilient och levande stad.
 
+![Hero Image](assets/IMG_2539.JPG)
 
 ---
 
@@ -33,9 +35,9 @@ Skicka en kort beskrivning av din idé till oss på mailen nedan så tar vi kont
 
 ## Verksamhetsområden
 
-| Gemenskap & Odling | Workshops & Lärande | Lokal Skörd |
+| | | |
 |:---:|:---:|:---:|
-
+| ![Gemenskap](assets/IMG_3092.JPG)<br>Gemenskap & Odling | ![Workshops](assets/IMG_7697.JPG)<br>Workshops & Lärande | ![Skörd](assets/IMG_9081.JPG)<br>Lokal Skörd |
 
 ---
 
@@ -58,8 +60,8 @@ Vill du bli medlem eller betala för event? Använd Swish för snabb och säker 
 
 Vi finns här för att svara på frågor och ta emot dina idéer.
 
-- [Facebook](https://web.facebook.com/hallbarmathbg/)
-- [Instagram](https://www.instagram.com/hallbarmathbg/)
+- [![Facebook](assets/img_social_fb.jpg)](https://web.facebook.com/hallbarmathbg/) [Facebook](https://web.facebook.com/hallbarmathbg/)
+- [![Instagram](assets/img_social_insta.jpg)](https://www.instagram.com/hallbarmathbg/) [Instagram](https://www.instagram.com/hallbarmathbg/)
 - [Email](mailto:hallbarmathbg@gmail.com)
 
 &copy; 2026 Hållbar mat Helsingborg
