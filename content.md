@@ -57,6 +57,8 @@ Kontakta oss och sätt igång!
 
 ## Bli Medlem & Kontakt
 
+![Gemenskap](assets/IMG_7697.JPG)
+
 **Hållbar mat Hbg**
 
 Vill du bli medlem eller betala för event? Använd Swish för snabb och säker betalning.
@@ -64,8 +66,7 @@ Vill du bli medlem eller betala för event? Använd Swish för snabb och säker 
 *   **Swish-nummer:** 123 456 78 90
 *   **Medlemsavgift:** 100 kr/år
 
-**Hör av dig!**
-[hallbarmathbg@gmail.com](mailto:hallbarmathbg@gmail.com)
+**Hör av dig!** [![Email icon](assets/icon_email.svg) hallbarmathbg@gmail.com](mailto:hallbarmathbg@gmail.com)
 
-*   [![Facebook icon](assets/img_social_fb.jpg)](https://web.facebook.com/hallbarmathbg/) [Facebook](https://web.facebook.com/hallbarmathbg/)
-*   [![Instagram icon](assets/img_social_insta.jpg)](https://www.instagram.com/hallbarmathbg/) [Instagram](https://www.instagram.com/hallbarmathbg/)
+*   [![Facebook icon](assets/icon_facebook.svg) Facebook](https://web.facebook.com/hallbarmathbg/)
+*   [![Instagram icon](assets/icon_instagram.svg) Instagram](https://www.instagram.com/hallbarmathbg/)

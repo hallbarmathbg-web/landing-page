@@ -1,18 +1,37 @@
+/* ============================================
+   Hållbar mat Helsingborg - Final v5
+   Comic Explosion Star | Left Badge | Spacing
+   ============================================ */
+
 /* CSS Reset & Variables */
 :root {
+    /* Preserved Color Palette */
     --color-bg-primary: #C8E6A0;
-    /* Pistachio Green from posters */
     --color-bg-secondary: #fff;
     --color-accent: #E65100;
-    /* Deep Orange/Red from badges */
+    --color-accent-dark: #D84315;
     --color-text-main: #2b3a2b;
-    /* Dark Green/Black text */
     --color-text-light: #fff;
 
+    /* Preserved Typography */
     --font-heading: 'Shrikhand', cursive;
     --font-body: 'Outfit', sans-serif;
 
-    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* 8pt Grid System */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+
+    /* Hit Target */
+    --hit-target: 44px;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --shadow-badge: 4px 6px 0 rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -25,170 +44,485 @@ body {
     background-color: var(--color-bg-primary);
     font-family: var(--font-body);
     color: var(--color-text-main);
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Layout Container */
 #app {
-    max-width: 1200px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 20px;
+    padding: var(--space-md);
+    padding-top: 120px;
     position: relative;
     z-index: 10;
 }
 
-/* Typography */
+/* ============================================
+   Header
+   ============================================ */
+.logo-container {
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.site-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.header-brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-text-main);
+    letter-spacing: -0.01em;
+}
+
+/* ============================================
+   Typography - LEFT ALIGNED
+   ============================================ */
 h1,
 h2,
 h3 {
     font-family: var(--font-heading);
     font-weight: 400;
-    /* Display font usually handles weight */
-    margin-bottom: 0.5em;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 h1 {
-    font-size: 4rem;
-    text-align: center;
-    color: var(--color-text-light);
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
-    margin: 40px 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--color-text-main);
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+    text-align: left;
 }
 
 p {
     font-size: 1.1rem;
-    margin-bottom: 1.5em;
+    margin-bottom: var(--space-md);
+    max-width: 60ch;
+    text-align: left;
 }
 
 a {
     color: var(--color-accent);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
 }
 
 a:hover {
-    text-decoration: underline;
+    opacity: 0.75;
 }
 
-/* Badge Style for H2 (The "Sticker" Look) */
+/* ============================================
+   H2 - Comic Explosion Star (#4) - LEFT SIDE
+   ============================================ */
 h2 {
     display: inline-block;
     background-color: var(--color-accent);
     color: white;
-    padding: 15px 30px;
-    font-size: 2.2rem;
-    transform: rotate(-2deg);
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-    /* starburst-ish clipped shape can be complex, sticking to "sticker" box for now to ensure readability */
-    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-    /* Organic/Hand-drawn shape */
-    margin-bottom: 30px;
+    font-size: 2rem;
+    padding: var(--space-xl) var(--space-2xl);
+    position: absolute;
+    z-index: 10;
+    /* LEFT SIDE - sticking out */
+    top: -35px;
+    left: -25px;
+    right: auto;
+    /* ROTATED */
+    transform: rotate(-12deg);
+    transform-origin: center center;
+    /* COMIC EXPLOSION STAR (#4) */
+    clip-path: polygon(50% 0%, 60% 18%, 78% 2%, 72% 22%,
+            98% 18%, 80% 35%, 100% 50%, 80% 65%,
+            98% 82%, 72% 78%, 78% 98%, 60% 82%,
+            50% 100%, 40% 82%, 22% 98%, 28% 78%,
+            2% 82%, 20% 65%, 0% 50%, 20% 35%,
+            2% 18%, 28% 22%, 22% 2%, 40% 18%);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-badge);
+    margin: 0;
 }
 
 h2:nth-of-type(even) {
-    transform: rotate(1deg);
-    background-color: #D84315;
-    /* Slightly darker orange variation */
+    background-color: var(--color-accent-dark);
+    transform: rotate(-15deg);
 }
 
-/* Sections - Card Logic */
+/* ============================================
+   Sections - Cards
+   ============================================ */
 section {
-    background-color: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(5px);
-    border-radius: 20px;
-    padding: 40px;
-    margin-bottom: 60px;
-    box-shadow: var(--shadow-card);
-    transition: transform 0.3s ease;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--space-md);
+    overflow: visible;
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-xl);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+}
+
+section:first-of-type {
+    margin-top: 0;
 }
 
 section:hover {
-    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
-/* Images */
-img {
-    max-width: 100%;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    transform: rotate(1deg);
+/* Content padding */
+section>*:not(img:first-child):not(.section-hero-img):not(h2) {
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
 }
 
-/* Specific Section Styling Logic (handled by JS adding classes, but CSS defaults here) */
+section>p:last-of-type,
+section>ul:last-of-type {
+    padding-bottom: var(--space-lg);
+}
 
-/* Hero Section (First section usually) */
-section:first-of-type {
-    text-align: center;
-    background: transparent;
+/* ============================================
+   Section Images - FILL TOP
+   ============================================ */
+section>img:first-child,
+section img.section-hero-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: var(--space-md) var(--space-md) 0 0;
+    margin: 0 0 var(--space-md) 0;
+    padding: 0 !important;
     box-shadow: none;
-    padding: 0;
-}
-
-section:first-of-type h1 {
     display: block;
-    /* Ensure H1 stays block */
 }
 
-/* Responsive Grid/List for Sections */
-@media (min-width: 768px) {
-    /* If we want a grid of cards, or alternating layout */
+/* Regular images */
+section img:not(:first-child):not(.section-hero-img):not([src*="icon_"]) {
+    max-width: calc(100% - var(--space-xl));
+    margin: var(--space-md) var(--space-lg);
+    border-radius: var(--space-sm);
+    box-shadow: var(--shadow-soft);
 }
 
-@media (max-width: 767px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        padding: 10px 20px;
-        width: 100%;
-        /* Full width badges on mobile? No, let them wrap */
-        white-space: normal;
-    }
-
-    section {
-        padding: 20px;
-    }
+/* Lists */
+section ul {
+    padding-left: calc(var(--space-lg) + var(--space-md));
+    list-style-type: disc;
 }
 
-/* Utility to hide "hr" since we use sections */
-hr {
-    display: none;
+section ul li {
+    margin-bottom: var(--space-xs);
 }
 
-/* Decoration */
+/* ============================================
+   Hero Section - Image fills BOTTOM
+   ============================================ */
+section.hero-section,
+section:first-of-type {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    box-shadow: var(--shadow-soft);
+    text-align: left;
+    padding: var(--space-xl) var(--space-lg);
+    padding-bottom: 0;
+    border-radius: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    overflow: hidden;
+    position: relative;
+}
+
+section.hero-section>*,
+section:first-of-type>* {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+section.hero-section h1,
+section:first-of-type h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    text-align: left;
+    margin: 0;
+    line-height: 1.1;
+    position: relative;
+}
+
+section.hero-section>p:first-of-type,
+section:first-of-type>p:first-of-type {
+    font-size: 1.2rem;
+    max-width: 50ch;
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* Hero image - fills BOTTOM of box */
+section.hero-section img,
+section:first-of-type img {
+    width: calc(100% + var(--space-lg) * 2);
+    margin-left: calc(-1 * var(--space-lg));
+    margin-right: calc(-1 * var(--space-lg));
+    height: 300px;
+    object-fit: cover;
+    object-position: center bottom;
+    border-radius: 0;
+    margin-top: var(--space-md);
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+/* ============================================
+   Contact Section - Spacing Fixes
+   ============================================ */
+.contact-section {
+    position: relative;
+    padding-bottom: 0 !important;
+    overflow: visible;
+}
+
+.contact-section>img:first-child,
+.contact-section img.section-hero-img {
+    border-radius: var(--space-md) var(--space-md) 0 0;
+}
+
+/* "Hör av dig" label - spacing */
+.contact-section strong {
+    display: inline;
+    margin-right: var(--space-xs);
+}
+
+/* Email - inline, no line break */
+.contact-section p:has(a[href^="mailto"]),
+.contact-section p a[href^="mailto"] {
+    display: inline;
+}
+
+.contact-section>p {
+    margin-bottom: var(--space-xl);
+}
+
+/* Swish/Member info box */
+.contact-section>ul:first-of-type {
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-md) var(--space-lg);
+    border-radius: var(--space-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    list-style: none;
+}
+
+.contact-section>ul:first-of-type li {
+    font-size: 1.1rem;
+    padding: var(--space-xs) 0;
+}
+
+/* Social bar - TIGHTER gap (4px) */
+.contact-section>ul:last-of-type {
+    position: relative;
+    margin: var(--space-lg) 0 0 0;
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--color-accent);
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+    border-radius: 0 0 var(--space-md) var(--space-md);
+}
+
+.contact-section>ul:last-of-type li {
+    display: flex;
+    align-items: center;
+}
+
+.contact-section>ul:last-of-type li a {
+    color: white;
+    display: flex;
+    align-items: center;
+    /* 5px gap */
+    gap: 5px;
+    font-size: 1.15rem;
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    min-height: var(--hit-target);
+    border-radius: var(--space-sm);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.contact-section>ul:last-of-type li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+/* ============================================
+   Icons
+   ============================================ */
+img[src*="icon_"] {
+    width: 24px;
+    height: 24px;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.contact-section ul:last-of-type img[src*="icon_"] {
+    filter: brightness(0) invert(1);
+    width: 32px;
+    height: 32px;
+}
+
+/* ============================================
+   Background Decoration
+   ============================================ */
 .bg-shape {
     position: fixed;
     z-index: 1;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.6;
+    filter: blur(100px);
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .shape-1 {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     background: #ffcc80;
-    top: -100px;
-    right: -100px;
+    top: -150px;
+    right: -150px;
 }
 
 .shape-2 {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     background: #ffffff;
-    bottom: -50px;
-    left: -50px;
+    bottom: -100px;
+    left: -100px;
 }
 
-/* Loading State */
+/* Loading */
 .loading {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-family: var(--font-heading);
-    opacity: 0.7;
+    opacity: 0.6;
+    padding: var(--space-2xl);
+}
+
+/* Hide HR */
+hr {
+    display: none;
+}
+
+/* ============================================
+   Mobile Responsive
+   ============================================ */
+@media (max-width: 767px) {
+    :root {
+        --space-lg: 24px;
+        --space-xl: 32px;
+    }
+
+    #app {
+        padding: var(--space-sm);
+        padding-top: 88px;
+    }
+
+    .logo-container {
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .site-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header-brand-name {
+        font-size: 0.95rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+        padding: var(--space-lg) var(--space-xl);
+        top: -25px;
+        left: -15px;
+        transform: rotate(-10deg);
+    }
+
+    section {
+        border-radius: var(--space-sm);
+        margin-bottom: var(--space-lg);
+        margin-top: var(--space-lg);
+    }
+
+    section>img:first-child,
+    section img.section-hero-img {
+        height: 180px;
+        border-radius: var(--space-sm) var(--space-sm) 0 0;
+    }
+
+    section>*:not(img:first-child):not(.section-hero-img):not(h2) {
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+    }
+
+    section ul {
+        padding-left: calc(var(--space-sm) + var(--space-md));
+    }
+
+    section.hero-section,
+    section:first-of-type {
+        padding: var(--space-lg) var(--space-sm);
+        padding-bottom: 0;
+    }
+
+    section.hero-section img,
+    section:first-of-type img {
+        width: calc(100% + var(--space-sm) * 2);
+        margin-left: calc(-1 * var(--space-sm));
+        height: 200px;
+    }
+
+    .contact-section>ul:last-of-type {
+        gap: var(--space-lg);
+        padding: var(--space-md);
+    }
+
+    .contact-section>ul:last-of-type li a {
+        font-size: 1rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .contact-section ul:last-of-type img[src*="icon_"] {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
 }
