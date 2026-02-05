@@ -1,0 +1,194 @@
+/* CSS Reset & Variables */
+:root {
+    --color-bg-primary: #C8E6A0;
+    /* Pistachio Green from posters */
+    --color-bg-secondary: #fff;
+    --color-accent: #E65100;
+    /* Deep Orange/Red from badges */
+    --color-text-main: #2b3a2b;
+    /* Dark Green/Black text */
+    --color-text-light: #fff;
+
+    --font-heading: 'Shrikhand', cursive;
+    --font-body: 'Outfit', sans-serif;
+
+    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    font-family: var(--font-body);
+    color: var(--color-text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Layout Container */
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    /* Display font usually handles weight */
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    color: var(--color-text-light);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5em;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Badge Style for H2 (The "Sticker" Look) */
+h2 {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: white;
+    padding: 15px 30px;
+    font-size: 2.2rem;
+    transform: rotate(-2deg);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    /* starburst-ish clipped shape can be complex, sticking to "sticker" box for now to ensure readability */
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    /* Organic/Hand-drawn shape */
+    margin-bottom: 30px;
+}
+
+h2:nth-of-type(even) {
+    transform: rotate(1deg);
+    background-color: #D84315;
+    /* Slightly darker orange variation */
+}
+
+/* Sections - Card Logic */
+section {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 60px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: rotate(1deg);
+}
+
+/* Specific Section Styling Logic (handled by JS adding classes, but CSS defaults here) */
+
+/* Hero Section (First section usually) */
+section:first-of-type {
+    text-align: center;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+section:first-of-type h1 {
+    display: block;
+    /* Ensure H1 stays block */
+}
+
+/* Responsive Grid/List for Sections */
+@media (min-width: 768px) {
+    /* If we want a grid of cards, or alternating layout */
+}
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        width: 100%;
+        /* Full width badges on mobile? No, let them wrap */
+        white-space: normal;
+    }
+
+    section {
+        padding: 20px;
+    }
+}
+
+/* Utility to hide "hr" since we use sections */
+hr {
+    display: none;
+}
+
+/* Decoration */
+.bg-shape {
+    position: fixed;
+    z-index: 1;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: #ffcc80;
+    top: -100px;
+    right: -100px;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: #ffffff;
+    bottom: -50px;
+    left: -50px;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    opacity: 0.7;
+}

@@ -22,3 +22,10 @@ node_modules/
 venv/
 __pycache__/
 *.log
+
+_references/
+
+knowledgebase.md
+PROJECT_HUB.md
+Thumbs.db
+.DS_Store
