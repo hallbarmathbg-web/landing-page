@@ -5,10 +5,27 @@
 .agent/
 .gemini/
 _project_specs/
+_references/
 PROJECT_HUB.md
 knowledgebase.md
 task.md
 init_project.ps1
+
+# Development/Utility Scripts
+*.ps1
+*.py
+*.bat
+server.js
+design_options.*
+star-explorer.html
+
+# Temp/Generated files
+favicon_v1*.png
+
+# Unused assets
+assets/hallbar-mat-logo.png
+assets/hallbar-mat-logo-transparent.png
+assets/img_social_*.jpg
 
 # System & IDE
 .vscode/
@@ -22,10 +39,3 @@ node_modules/
 venv/
 __pycache__/
 *.log
-
-_references/
-
-knowledgebase.md
-PROJECT_HUB.md
-Thumbs.db
-.DS_Store

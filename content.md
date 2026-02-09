@@ -55,7 +55,7 @@ Kontakta oss och sätt igång!
 
 ---
 
-## Bli Medlem & Kontakt
+## Bli Medlem
 
 ![Gemenskap](assets/IMG_7697.JPG)
 
@@ -66,7 +66,5 @@ Vill du bli medlem eller betala för event? Använd Swish för snabb och säker 
 *   **Swish-nummer:** 123 456 78 90
 *   **Medlemsavgift:** 100 kr/år
 
-**Hör av dig!** [![Email icon](assets/icon_email.svg) hallbarmathbg@gmail.com](mailto:hallbarmathbg@gmail.com)
 
-*   [![Facebook icon](assets/icon_facebook.svg) Facebook](https://web.facebook.com/hallbarmathbg/)
-*   [![Instagram icon](assets/icon_instagram.svg) Instagram](https://www.instagram.com/hallbarmathbg/)
+**Hör av dig!** [hallbarmathbg@gmail.com](mailto:hallbarmathbg@gmail.com)

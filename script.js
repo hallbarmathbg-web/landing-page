@@ -1,158 +1,173 @@
-// script.js - Premium Redesign with Robust MD Handling
-
 document.addEventListener('DOMContentLoaded', async () => {
-    const appEl = document.getElementById('main-content');
-    const headerEl = document.querySelector('.logo-container');
+    const introCard = document.getElementById('intro-card');
+    const navActions = document.getElementById('nav-actions');
+    const mainContent = document.getElementById('main-content');
+    const heroSection = document.getElementById('hero-section');
+    const navContainer = document.getElementById('dynamic-nav');
 
-    // ============================================
-    // 1. Dynamic Header Padding & Branding
-    // ============================================
-    const setupHeader = () => {
-        if (!headerEl) return;
-
-        // Add brand name if not present
-        if (!headerEl.querySelector('.header-brand-name')) {
-            const brandName = document.createElement('span');
-            brandName.className = 'header-brand-name';
-            brandName.textContent = 'Hållbar Mat Hbg';
-            headerEl.appendChild(brandName);
-        }
-
-        // Dynamic padding
-        const updatePadding = () => {
-            const height = headerEl.offsetHeight;
-            const appWrapper = document.getElementById('app');
-            if (appWrapper) {
-                appWrapper.style.paddingTop = (height + 24) + 'px'; // 24px = 3 × 8pt
-            }
-        };
-
-        updatePadding();
-        window.addEventListener('resize', updatePadding);
-    };
-
-    setupHeader();
-
-    // ============================================
-    // 2. Load & Parse Markdown
-    // ============================================
     try {
+        // 1. Fetch Markdown
         const response = await fetch('content.md?t=' + Date.now());
-        if (!response.ok) throw new Error(`Fel vid laddning (${response.status})`);
-
+        if (!response.ok) throw new Error('Failed to load content');
         const text = await response.text();
-        if (!text.trim()) throw new Error('Innehållsfilen är tom');
 
-        const htmlContent = marked.parse(text);
-        appEl.innerHTML = htmlContent;
-        appEl.classList.remove('loading');
+        // 2. Parse Markdown
+        // We use a temporary container to parse HTML so we can manipulate DOM nodes
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = marked.parse(text);
 
-        // 3. Process Layout
-        processLayout(appEl);
+        // 3. Process Content
+        distributeContent(tempDiv, introCard, mainContent, heroSection);
+
+        // 3b. Inject Contact Buttons into Header
+        injectContactButtons(mainContent, navActions);
+
+        // 4. Generate Navigation
+        generateNavigation(mainContent, navContainer);
 
     } catch (error) {
-        appEl.innerHTML = `
-            <div style="text-align:center; padding: 64px 24px; max-width: 400px; margin: 0 auto;">
-                <p style="color:var(--color-accent); font-weight:600; font-size: 1.25rem; margin-bottom: 16px;">
-                    Kunde inte ladda innehållet
-                </p>
-                <p style="opacity: 0.7; font-size: 0.9rem;">${error.message}</p>
-            </div>
-        `;
-        appEl.classList.remove('loading');
-        console.error('Content loading failed:', error);
+        console.error('Error:', error);
+        introCard.innerHTML = `<p style="color:red">Ett fel uppstod: ${error.message}</p>`;
     }
 });
 
-// ============================================
-// Layout Processing - Robust Section Splitting
-// ============================================
-function processLayout(container) {
-    const children = Array.from(container.children);
-    if (children.length === 0) return;
+/* ... distributeContent (unchanged) ... */
+function distributeContent(sourceContainer, introTarget, mainTarget, heroTarget) {
+    // Strategy: Everything before the first <hr> is INTRO.
+    // Everything after is MAIN CONTENT.
 
-    // Detect splitting strategy
-    const hasHR = children.some(c => c.tagName === 'HR');
-    const hasH2 = children.some(c => c.tagName === 'H2');
+    const children = Array.from(sourceContainer.children);
+    let isIntro = true;
 
-    container.innerHTML = '';
+    // Clear targets
+    introTarget.innerHTML = '';
+    mainTarget.innerHTML = '';
 
-    let currentSection = document.createElement('section');
-    container.appendChild(currentSection);
+    const introElements = [];
+    const mainElements = [];
 
-    if (hasHR) {
-        // STRATEGY A: Split by <hr> (preferred)
-        children.forEach(child => {
-            if (child.tagName === 'HR') {
-                if (currentSection.children.length > 0) {
-                    currentSection = document.createElement('section');
-                    container.appendChild(currentSection);
-                }
-            } else {
-                currentSection.appendChild(child);
-            }
-        });
-    } else if (hasH2) {
-        // STRATEGY B: Split by <h2> (fallback)
-        children.forEach(child => {
-            if (child.tagName === 'H2' && currentSection.children.length > 0) {
-                currentSection = document.createElement('section');
-                container.appendChild(currentSection);
-            }
-            currentSection.appendChild(child);
-        });
-    } else {
-        // STRATEGY C: Single block
-        children.forEach(child => currentSection.appendChild(child));
-    }
-
-    // ============================================
-    // Post-Process Sections
-    // ============================================
-    const sections = container.querySelectorAll('section');
-
-    sections.forEach((section, index) => {
-        // Remove empty sections
-        if (section.children.length === 0 || !section.innerText.trim()) {
-            section.remove();
-            return;
+    children.forEach(child => {
+        if (child.tagName === 'HR') {
+            isIntro = false;
+            return; // Skip the HR itself
         }
 
-        // Hero section (first one)
-        if (index === 0) {
-            section.classList.add('hero-section');
-        }
-
-        // Contact section (keyword detection)
-        const text = section.innerText.toLowerCase();
-        const contactKeywords = ['swish', 'bankgiro', 'bg:', 'kontakt', 'medlem', 'e-post', 'följ oss'];
-        if (contactKeywords.some(kw => text.includes(kw))) {
-            section.classList.add('contact-section');
-        }
-
-        // Move first image to top of section (if not hero)
-        if (index > 0) {
-            promoteFirstImage(section);
+        if (isIntro) {
+            introElements.push(child);
+        } else {
+            mainElements.push(child);
         }
     });
-}
 
-// ============================================
-// Image Promotion - Move to Top of Card
-// ============================================
-function promoteFirstImage(section) {
-    // Find the first <img> that's not an icon
-    const images = section.querySelectorAll('img:not([src*="icon_"])');
-    if (images.length === 0) return;
+    // --- Process Intro ---
+    // Extract first image for Hero Background
+    const heroImgIndex = introElements.findIndex(el => el.tagName === 'P' && el.querySelector('img'));
 
-    const firstImg = images[0];
-
-    // Only promote if it's NOT already the first child
-    if (section.firstElementChild !== firstImg) {
-        // Clone to preserve position, then move original to top
-        section.insertBefore(firstImg, section.firstChild);
+    if (heroImgIndex !== -1) {
+        const pTag = introElements[heroImgIndex];
+        const img = pTag.querySelector('img');
+        if (img) {
+            // Set background
+            heroTarget.style.backgroundImage = `url('${img.src}')`;
+            // Remove this paragraph from intro content
+            introElements.splice(heroImgIndex, 1);
+        }
     }
 
-    // Ensure proper styling
-    firstImg.classList.add('section-hero-img');
+    // Append remaining intro elements to card
+    introElements.forEach(el => introTarget.appendChild(el));
+
+    // --- Process Main Content ---
+    // Group into sections based on H2
+    let currentSection = null;
+
+    mainElements.forEach(el => {
+        if (el.tagName === 'H2') {
+            // Start new section
+            if (currentSection) mainTarget.appendChild(currentSection);
+
+            currentSection = document.createElement('section');
+            // Create ID for navigation
+            const id = el.textContent.toLowerCase()
+                .replace(/[åä]/g, 'a')
+                .replace(/[ö]/g, 'o')
+                .replace(/[^a-z0-9]/g, '-')
+                .replace(/-+/g, '-');
+            currentSection.id = id;
+
+            currentSection.appendChild(el);
+        } else {
+            if (!currentSection) {
+                // Orphan content before first H2
+                currentSection = document.createElement('section');
+            }
+            currentSection.appendChild(el);
+        }
+    });
+
+    // Append last section
+    if (currentSection) mainTarget.appendChild(currentSection);
+}
+
+function injectContactButtons(sourceContainer, actionTarget) {
+    // Check if target exists
+    if (!actionTarget) return;
+
+    actionTarget.innerHTML = ''; // Clear existing
+
+    // 1. Email (Primary Button) - Always show
+    const btn = document.createElement('a');
+    btn.href = "mailto:hallbarmathbg@gmail.com";
+    btn.className = 'btn-primary-hero';
+    btn.innerHTML = `<img src="assets/icon_email.svg" style="width: 20px; filter: brightness(0) invert(1);"> Kontakta Oss`;
+    actionTarget.appendChild(btn);
+
+    // Social Row
+    const socialRow = document.createElement('div');
+    socialRow.className = 'social-row';
+
+    // 2. Facebook (Hardcoded)
+    const fbBtn = document.createElement('a');
+    fbBtn.href = "https://web.facebook.com/hallbarmathbg/";
+    fbBtn.className = 'btn-icon-hero';
+    fbBtn.innerHTML = `<img src="assets/icon_facebook.svg" alt="Facebook">`;
+    socialRow.appendChild(fbBtn);
+
+    // 3. Instagram (Hardcoded)
+    const instaBtn = document.createElement('a');
+    instaBtn.href = "https://www.instagram.com/hallbarmathbg/";
+    instaBtn.className = 'btn-icon-hero';
+    instaBtn.innerHTML = `<img src="assets/icon_instagram.svg" alt="Instagram">`;
+    socialRow.appendChild(instaBtn);
+
+    actionTarget.appendChild(socialRow);
+}
+
+function generateNavigation(contentContainer, navTarget) {
+    const sections = contentContainer.querySelectorAll('section');
+    navTarget.innerHTML = ''; // clear
+
+    sections.forEach(section => {
+        const header = section.querySelector('h2');
+        if (header) {
+            const link = document.createElement('a');
+            link.href = `#${section.id}`;
+            link.textContent = header.textContent;
+
+            // Optional: Smooth scroll handling if verified needed, 
+            // but standard anchor links work well with scroll-behavior: smooth
+
+            navTarget.appendChild(link);
+        }
+    });
+
+    // Add "Bli Medlem" button manually if desired, or let it be just another link
+    // Checking if there is a 'Bli Medlem' section
+    const memberSection = Array.from(sections).find(s => s.querySelector('h2')?.textContent.includes('Medlem'));
+
+    // If we want to style the last link as a button:
+    if (navTarget.lastElementChild) {
+        navTarget.lastElementChild.classList.add('nav-cta');
+        // We can add specific styling for .nav-cta in CSS if we want it to pop
+    }
 }
