@@ -119,7 +119,7 @@ function injectContactButtons(sourceContainer, actionTarget) {
     const btn = document.createElement('a');
     btn.href = "mailto:hallbarmathbg@gmail.com";
     btn.className = 'btn-primary-hero';
-    btn.innerHTML = `<img src="assets/icon_email.svg" style="width: 20px; filter: brightness(0) invert(1);"> Kontakta Oss`;
+    btn.innerHTML = `<img src="assets/icon_email.svg" style="width: 20px; filter: brightness(0) invert(1);"> <span class="btn-text">Kontakta Oss</span>`;
     actionTarget.appendChild(btn);
 
     // Social Row

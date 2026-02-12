@@ -97,6 +97,15 @@ a {
     font-family: var(--font-heading);
     font-size: 1.4rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    /* Prevent line breaks */
+}
+
+/* Hide brand text on very small screens */
+@media (max-width: 400px) {
+    .brand-text {
+        display: none;
+    }
 }
 
 .nav-logo {
@@ -247,6 +256,8 @@ a {
     display: flex;
     gap: 12px;
     align-items: center;
+    white-space: nowrap;
+    /* Prevent line breaks */
 }
 
 /* Big Button: Semi-transparent Orange, White text */
@@ -276,6 +287,28 @@ a {
 .btn-primary-hero img {
     filter: brightness(0) invert(1);
     width: 20px;
+}
+
+/* Responsive Button: Collapse to Circle on Mobile */
+@media (max-width: 600px) {
+    .btn-primary-hero .btn-text {
+        display: none;
+    }
+
+    .btn-primary-hero {
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        justify-content: center;
+        background-color: var(--color-accent);
+        /* Keep it orange */
+        gap: 0;
+    }
+
+    .btn-primary-hero img {
+        margin: 0;
+    }
 }
 
 .social-row {
@@ -323,7 +356,20 @@ a {
 
 section {
     margin-bottom: 100px;
-    scroll-margin-top: 50px;
+    scroll-margin-top: 130px;
+    /* Nav height (105px) + Buffer */
+}
+
+/* List Styling Restoration */
+section ul,
+section ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+section li {
+    margin-bottom: 0.5rem;
 }
 
 /* FIX FOR GIANT ICONS: Only target direct content images, NOT icons within links/buttons */
